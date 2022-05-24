@@ -39,4 +39,5 @@ app.get("/logout", (req, res, next) => {
 app.get("/auth/failure", (req, res) => {
   res.send("something went wrong");
 });
-app.listen(5000, () => console.log("Listing on 5000"));
+const port = process.env.PORT || 5000;
+app.listen(port, () => console.log("Listing on 5000"));
