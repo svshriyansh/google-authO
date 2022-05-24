@@ -1,20 +1,45 @@
 const express = require("express");
 const passport = require("passport");
 const session = require("express-session");
+const cookieSession = require("cookie-session");
+const cookieParser = require("cookie-parser");
 require("./auth");
 const app = express();
 
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["key1", "key2"],
+    maxAge: 24 * 60 * 60 * 100,
+  })
+);
+app.use(cookieParser());
 function isLoggedIn(req, res, next) {
   console.log(req.user);
-  req.user ? next() : res.sendStatus(401);
+  req.user ? next() : res.redirect("/");
 }
+
+const authCheck = (req, res, next) => {
+  if (!req.user) {
+    res.send("<a href = /auth/google> Sign in uing email </a>");
+  } else {
+    next();
+  }
+};
 
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get("/", (req, res) => {
-  res.send('<a href="/auth/google">Authenticating with google</a>');
+app.get("/", authCheck, (req, res) => {
+  res.json({
+    user: req.user.displayName,
+    auth: true,
+  });
+});
+
+app.get("/current", (req, res) => {
+  res.send(req.user.displayName);
 });
 app.get(
   "/auth/google",
@@ -23,7 +48,7 @@ app.get(
 app.get(
   "/google/callback",
   passport.authenticate("google", {
-    successRedirect: "/protected",
+    successRedirect: "/",
     failureRedirect: "/auth/failure",
   })
 );
@@ -33,7 +58,6 @@ app.get("/protected", isLoggedIn, (req, res) => {
 });
 app.get("/logout", (req, res, next) => {
   req.logout();
-  req.session.destroy();
   res.send("Goodbuy...!");
 });
 app.get("/auth/failure", (req, res) => {
