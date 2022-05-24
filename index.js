@@ -21,7 +21,7 @@ function isLoggedIn(req, res, next) {
 
 const authCheck = (req, res, next) => {
   if (!req.user) {
-    res.send("<a href = /auth/google> Sign in uing email </a>");
+    res.send("<a href = /auth/google> Sign in with your email </a>");
   } else {
     next();
   }
