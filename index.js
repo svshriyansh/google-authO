@@ -40,4 +40,4 @@ app.get("/auth/failure", (req, res) => {
   res.send("something went wrong");
 });
 const port = process.env.PORT || 5000;
-app.listen(port, () => console.log("Listing on 5000"));
+app.listen(port, () => console.log(`Listing on ${port}`));

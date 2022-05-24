@@ -9,7 +9,7 @@ passport.use(
     {
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:5000/google/callback",
+      callbackURL: "https://demo-autho.herokuapp.com/callback",
       passReqToCallback: true,
     },
     function (request, accessToken, refreshToken, profile, done) {
