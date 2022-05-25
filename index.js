@@ -60,7 +60,7 @@ app.get("/protected", isLoggedIn, (req, res) => {
 });
 app.get("/logout", (req, res, next) => {
   req.logout();
-  res.send("Goodbuy...!");
+  res.redirect("/");
 });
 app.get("/auth/failure", (req, res) => {
   res.send("something went wrong");

@@ -9,10 +9,10 @@ const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
 passport.use(
   new GoogleStrategy(
     {
-      clientID: GOOGLE_CLIENT_ID,
-      clientSecret: GOOGLE_CLIENT_SECRET,
-      //   callbackURL: "http://localhost:5000/google/callback",
-      callbackURL: "https://demo-autho.herokuapp.com/google/callback",
+      clientID: "894231780010-dv4akhputn7n5pcev0puqr9q6p4s958u.apps.googleusercontent.com",
+      clientSecret: "Ksy1_PoO5SZ59s391XiuPPtw",
+        callbackURL: "http://localhost:5000/google/callback",
+      // callbackURL: "https://demo-autho.herokuapp.com/google/callback",
       passReqToCallback: true,
     },
     function (request, accessToken, refreshToken, profile, done) {
