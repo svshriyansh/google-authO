@@ -1,8 +1,10 @@
 const passport = require("passport");
 var GoogleStrategy = require("passport-google-oauth2").Strategy;
-GOOGLE_CLIENT_ID =
-  "165328502385-kjai1tn72alrthpp402o1cm5amhissg6.apps.googleusercontent.com";
-GOOGLE_CLIENT_SECRET = "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";
+require("dotenv").config();
+const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
+// GOOGLE_CLIENT_ID =
+//   "165328502385-kjai1tn72alrthpp402o1cm5amhissg6.apps.googleusercontent.com";
+// GOOGLE_CLIENT_SECRET = "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";
 
 passport.use(
   new GoogleStrategy(
