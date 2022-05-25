@@ -21,7 +21,8 @@ function isLoggedIn(req, res, next) {
 
 const authCheck = (req, res, next) => {
   if (!req.user) {
-    res.send("<a href = /auth/google> Sign in with your email </a>");
+    // res.send("<a href = /auth/google> Sign in with your email </a>");
+    res.sendFile(__dirname + "/signin.html");
   } else {
     next();
   }
@@ -32,10 +33,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get("/", authCheck, (req, res) => {
-  res.json({
-    user: req.user.displayName,
-    auth: true,
-  });
+  // res.json({
+  //   user: req.user.displayName,
+  //   auth: true,
+  // });
+  res.send(`Hello ${req.user.displayName}<br></br>Email:${req.user.email}<br></br><a href = /logout> log Out </a>`);
 });
 
 app.get("/current", (req, res) => {
